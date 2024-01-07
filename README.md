@@ -12,6 +12,9 @@
 | size()              | O(1)         | O(1)         | O(1)         |
 | isEmpty             | O(1)         | O(1)         | O(1)         |
 
+> [!NOTE]
+> The complexity space is O(n)
+
 ## CircularLinkedList
 | OPERATION           | Best Case  | Average Case                 | Worst Case                   |
 |---------------------|------------|------------------------------|------------------------------|
@@ -23,3 +26,35 @@
 | clear()             | O(1)       | O(1)                         | O(1)                         |
 | size()              | O(1)       | O(1)                         | O(1)                         |
 | isEmpty             | O(1)       | O(1)                         | O(1)                         |
+
+> [!NOTE]
+> The Complexity space is O(2n)
+
+# Queue Complexity Time
+
+## CircularQueue
+| OPERATION | Best Case | Average Case | Worst Case |
+|-----------|-----------|--------------|------------|
+| enqueue   | O(1)      | O(1)         | O(1)       |
+| dequeue   | O(1)      | O(1)         | O(1)       |
+| peek      | O(1)      | O(1)         | O(1)       |
+| pool      | O(1)      | O(1)         | O(1)       |
+| isEmpty   | O(1)      | O(1)         | O(1)       |
+| size      | O(1)      | O(1)         | O(1)       |
+
+> [!NOTE]
+> The complexity space is O(2n).
+
+# Stack Complexity Time
+
+## CircularStack
+| OPERATION | Best Case | Average Case | Worst Case |
+|-----------|-----------|--------------|------------|
+| push      | O(1)      | O(1)         | O(1)       |
+| pop       | O(1)      | O(1)         | O(1)       |
+| peek      | O(1)      | O(1)         | O(1)       |
+| isEmpty   | O(1)      | O(1)         | O(1)       |
+| size      | O(1)      | O(1)         | O(1)       |
+
+> [!NOTE]
+> The complexity space is O(2n).
