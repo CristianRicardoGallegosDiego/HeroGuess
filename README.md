@@ -1,4 +1,4 @@
-# List Complexity Time
+# List Time Complexity
 
 ## SingleLinkedList
 | OPERATION           | Best Case    | Average Case | Worst Case   |
@@ -13,7 +13,7 @@
 | isEmpty             | O(1)         | O(1)         | O(1)         |
 
 > [!NOTE]
-> The complexity space is O(n)
+> The complexity space is O(n).
 
 ## CircularLinkedList
 | OPERATION           | Best Case  | Average Case                 | Worst Case                   |
@@ -28,9 +28,9 @@
 | isEmpty             | O(1)       | O(1)                         | O(1)                         |
 
 > [!NOTE]
-> The Complexity space is O(2n)
+> The Complexity space is O(2n).
 
-# Queue Complexity Time
+# Queue Time Complexity
 
 ## CircularQueue
 | OPERATION | Best Case | Average Case | Worst Case |
@@ -45,7 +45,7 @@
 > [!NOTE]
 > The complexity space is O(2n).
 
-# Stack Complexity Time
+# Stack Time Complexity
 
 ## CircularStack
 | OPERATION | Best Case | Average Case | Worst Case |
