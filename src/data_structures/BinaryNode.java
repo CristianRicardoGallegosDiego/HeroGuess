@@ -19,8 +19,16 @@ public class BinaryNode<K, E> {
         return element;
     }
 
+    public void setElement(E element) {
+        this.element = element;
+    }
+
     public BinaryNode<K, E> getParent() {
         return parent;
+    }
+
+    public void setParent(BinaryNode<K, E> parent) {
+        this.parent = parent;
     }
 
     public BinaryNode<K, E> getLeftSon() {

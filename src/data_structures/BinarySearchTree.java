@@ -3,30 +3,29 @@ package src.data_structures;
 public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySearchTree<K, E> {
 
     private BinaryNode<K, E> root;
-    private int size;
-
-    // BIEN
-    public BinarySearchTree() {
-        size = 0;
-    }
 
     //BIEN
+    @Override
     public BinaryNode<K, E> getRoot() {
         return root;
     }
 
-    // BIEN
-    public int size() {
-        return size;
-    }
-
     //BIEN
+    @Override
     public boolean isEmpty() {
         return root == null;
     }
 
     // BIEN
+    @Override
     public boolean isLeaf(BinaryNode<K, E> node) {
+        return (node.getLeftSon() == null && node.getRightSon() == null);
+    }
+
+    // BIEN
+    @Override
+    public boolean isLeaf(K key) {
+        BinaryNode<K, E> node = retrieve(root, key);
         return (node.getLeftSon() == null && node.getRightSon() == null);
     }
 
@@ -35,7 +34,6 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
     public void insert(K key, E element) {
         if (key == null || element == null)
             throw new IllegalArgumentException("Key or element cannot be nulls.");
-        size++;
         if (isEmpty()) {
             root = new BinaryNode<K, E>(key, element, null);
         } else {
@@ -60,11 +58,55 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
         }
     }
 
+    @Override
     public E delete(K key) {
-        return null;
+        if (key == null)
+            throw new IllegalArgumentException("Key cannot be null.");
+        BinaryNode<K, E> node = retrieve(root, key);
+        if (node == null)
+            return null;
+        E element = node.getElement();
+        BinaryNode<K, E> parent = node.getParent();
+        if (isLeaf(node)) {
+            if (parent == null) {
+                root = null;
+            } else {
+                if (parent.getLeftSon().equals(node)) {
+                    parent.setLeftSon(null);
+                } else {
+                    parent.setRightSon(null);
+                }
+            }
+        } else if (node.getLeftSon() != null && node.getRightSon() != null) {
+            BinaryNode<K, E> selected = findMinNode(node.getRightSon());
+            delete(selected.key);
+            node.key = selected.key;
+            node.setElement(selected.getElement());
+        } else {
+            BinaryNode<K, E> child = (node.getLeftSon() != null)? node.getLeftSon() : node.getRightSon();
+            child.setParent(parent);
+            if (parent == null) {
+                root = child;
+            } else {
+                if (node.getLeftSon() != null) {
+                    parent.setLeftSon(child);
+                } else {
+                    parent.setRightSon(child);
+                }
+            }
+        }
+        return element;
     }
 
     // BIEN
+    private BinaryNode<K, E> findMinNode(BinaryNode<K, E> node) {
+        while (node.getLeftSon() != null) {
+            node = node.getLeftSon();
+        }
+        return node;
+    }
+
+    @Override
     public E retrieve(K key) {
         if (key == null)
             throw new IllegalArgumentException("Key cannot be null.");
@@ -86,6 +128,7 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
     }
 
     // BIEN
+    @Override
     public int level(K key) {
         if (key == null)
             throw new IllegalArgumentException("Key cannot be null.");
@@ -106,7 +149,10 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
     }
 
     // BIEN
+    @Override
     public E findMax() {
+        if (isEmpty())
+            throw new IllegalStateException("Tree is empty.");
         BinaryNode<K, E> currentNode = root;
         BinaryNode<K, E> auxiliaryNode = null;
         while (currentNode != null) {
@@ -117,7 +163,10 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
     }
 
     //BIEN
+    @Override
     public E findMin() {
+        if (isEmpty())
+            throw new IllegalStateException("Tree is empty.");
         BinaryNode<K, E> currentNode = root;
         BinaryNode<K, E> auxiliaryNode = null;
         while (currentNode != null) {
@@ -137,7 +186,7 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
         return array;
     }
 
-    // BIEN
+    @Override
     public E[] preorder() {
         if (isEmpty())
             return null;
@@ -155,6 +204,7 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
         preorder(preorder, currentNode.getRightSon());
     }
 
+    @Override
     public E[] inorder() {
         if (isEmpty())
             return null;
@@ -163,6 +213,7 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
         return toArray(tree);
     }
 
+    // BIEN
     private void inorder(ADTQueue<E> inorder, BinaryNode<K, E> currentNode) {
         if (currentNode == null)
             return;
@@ -171,6 +222,7 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
         inorder(inorder, currentNode.getRightSon());
     }
 
+    @Override
     public E[] postorder() {
         if (isEmpty())
             return null;
@@ -179,6 +231,7 @@ public class BinarySearchTree<K extends Comparable<K>, E> implements ADTBinarySe
         return toArray(tree);
     }
 
+    // BIEN
     private void postorder(ADTQueue<E> postorder, BinaryNode<K, E> currentNode) {
         if (currentNode == null)
             return;
